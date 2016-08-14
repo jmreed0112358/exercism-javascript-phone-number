@@ -1,0 +1,19 @@
+{
+  "name": "phone-number",
+  "version": "0.0.1",
+  "description": "Exercism: Javascript solution for the phone-number problem.",
+  "main": "phone-number.js",
+  "scripts": {
+    "test": "jasmine-node phone-number.spec.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jmreed0112358/exercism-javascript-phone-number.git"
+  },
+  "author": "Jeremy M. Reed",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jmreed0112358/exercism-javascript-phone-number/issues"
+  },
+  "homepage": "https://github.com/jmreed0112358/exercism-javascript-phone-number#readme"
+}
