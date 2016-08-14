@@ -8,3 +8,5 @@ var PhoneNumber = function(rawNumber) {
 PhoneNumber.prototype.number = function() {
   throw new NotImplementedException();
 };
+
+module.exports = PhoneNumber;
