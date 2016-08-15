@@ -1,7 +1,10 @@
+'use strict'
+
 var validator = require('validator'),
   NotImplementedException = require('./exceptions/NotImplementedException.js'),
   InvalidParameterException = require('./exceptions/InvalidParameterException.js');
 
+const VALID_CHARS = '0123456789';
 const ERROR_NUMBER = '0000000000';
 
 var PhoneNumber = function(rawNumber) {
@@ -36,7 +39,7 @@ PhoneNumber.prototype.sanitize = function(rawInput) {
   }
 
   for (i = 0 ; i < rawInput.length ; i++ ) {
-    if (validator.isWhitelisted(rawInput[i], '0123456789')) {
+    if (validator.isWhitelisted(rawInput[i], VALID_CHARS)) {
       result = result + rawInput[i];
     }
   }

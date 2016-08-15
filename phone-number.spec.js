@@ -47,7 +47,7 @@ xdescribe('toString()', function() {
   });
 });
 
-xdescribe('sanitize()', function() {
+describe('sanitize()', function() {
   it('throws InvalidParameterException when given non-string input', function() {
     expect(function() {
       var phone = new PhoneNumber('10');
@@ -89,9 +89,8 @@ xdescribe('sanitize()', function() {
   });
 });
 
-describe('validatePhoneNumber()', function() {
+xdescribe('validatePhoneNumber()', function() {
   it('throws InvalidParameterException for non-string input', function() {
-    it('throws InvalidParameterException when given non-string input', function() {
     expect(function() {
       var phone = new PhoneNumber('10');
       phone.validatePhoneNumber({});
