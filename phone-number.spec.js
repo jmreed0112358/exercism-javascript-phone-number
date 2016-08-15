@@ -1,6 +1,10 @@
-var PhoneNumber = require('./phone-number');
+var PhoneNumber = require('./phone-number'),
+  NotImplementedException = require('./exceptions/NotImplementedException.js'),
+  InvalidParameterException = require('./exceptions/InvalidParameterException.js');
 
-describe('PhoneNumber()', function() {
+const UNPRINTABLE_CHARS = '\u0000\u0001\u0002\u0003\u0004\u0005\u0006\u0007\b\t\n\u000b\f\r\u000e\u000f\u0010\u0011\u0012\u0013\u0014\u0015\u0016\u0017\u0018\u0019\u001a\u001b\u001c\u001d\u001e\u001f';
+
+xdescribe('number()', function() {
   it('cleans the number (123) 456-7890', function() {
     var phone = new PhoneNumber('(123) 456-7890');
     expect(phone.number()).toEqual('1234567890');
@@ -25,14 +29,74 @@ describe('PhoneNumber()', function() {
     var phone = new PhoneNumber('123456789');
     expect(phone.number()).toEqual('0000000000');
   });
+});
 
+xdescribe('areaCode()', function() {
   xit('has an area code', function() {
     var phone = new PhoneNumber('1234567890');
     expect(phone.areaCode()).toEqual('123');
   });
+});
 
+xdescribe('toString()', function() {
   xit('formats a number', function() {
     var phone = new PhoneNumber('1234567890');
     expect(phone.toString()).toEqual('(123) 456-7890');
   });
+});
+
+describe('sanitize()', function() {
+  it('throws InvalidParameterException when given non-string input', function() {
+    expect(function() {
+      var phone = new PhoneNumber('10');
+      phone.sanitise({});
+    }).toThrow(
+      new InvalidParameterException('Input was not a string'));
+  });
+
+  it('removes garbage characters and returns a numeric string.', function() {
+    var input = UNPRINTABLE_CHARS + '01234567890123456789';
+    var phone = new PhoneNumber(input);
+    var actual = phone.sanitize(input)
+    var expected = '01234567890123456789';
+    expect(actual).toEqual(expected);
+  });
+
+  it('removes letters and returns a numeric string', function() {
+    var input = 'a012asdfasfwei345earwar;klasjdf678901a;lksjd\t\nfaklsjfa23^((*$&(#*))@)*&$(&456789';
+    var phone = new PhoneNumber(input);
+    var actual = phone.sanitize(input)
+    var expected = '01234567890123456789';
+    expect(actual).toEqual(expected);
+  });
+
+  it('returns empty string when there are no numbers in the input', function () {
+    var input = UNPRINTABLE_CHARS + 'asjdafklsjfklajsklf;jsa*&*()&*()&*()&$(*)&)$*(';
+    var phone = new PhoneNumber(input);
+    var actual = phone.sanitize(input)
+    var expected = '';
+    expect(actual).toEqual(expected);
+  });
+
+  it('negative numbers become positive, since \-\ is not a number', function() {
+    var input = '1234';
+    var phone = new PhoneNumber(input);
+    var actual = phone.sanitize(input)
+    var expected = '1234';
+    expect(actual).toEqual(expected);
+  });
+});
+
+xdescribe('validatePhoneNumber()', function() {
+  it('returns error number for input containing non-numeric characters');
+
+  it('returns error number for input containing more than 11 characters');
+
+  it('returns error number for input containing less than 10 characters');
+
+  it('returns valid number for 10 digit numeric strings');
+
+  it('returns valid number for 11 digit numeric strings when the first digit is a \'1\'');
+
+  it('returns error number for 11 digit numeric strings when the first digit is not a \'1\'');
 });
