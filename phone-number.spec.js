@@ -7,28 +7,28 @@ var PhoneNumber = require('./phone-number'),
 const ERROR_NUMBER = '0000000000';
 const UNPRINTABLE_CHARS = '\u0000\u0001\u0002\u0003\u0004\u0005\u0006\u0007\b\t\n\u000b\f\r\u000e\u000f\u0010\u0011\u0012\u0013\u0014\u0015\u0016\u0017\u0018\u0019\u001a\u001b\u001c\u001d\u001e\u001f';
 
-xdescribe('number()', function() {
+describe('number()', function() {
   it('cleans the number (123) 456-7890', function() {
     var phone = new PhoneNumber('(123) 456-7890');
     expect(phone.number()).toEqual('1234567890');
   });
 
-  xit('cleans numbers with dots', function() {
+  it('cleans numbers with dots', function() {
     var phone = new PhoneNumber('123.456.7890');
     expect(phone.number()).toEqual('1234567890');
   });
 
-  xit('valid when 11 digits and first digit is 1', function() {
+  it('valid when 11 digits and first digit is 1', function() {
     var phone = new PhoneNumber('11234567890');
     expect(phone.number()).toEqual('1234567890');
   });
 
-  xit('invalid when 11 digits', function() {
+  it('invalid when 11 digits', function() {
     var phone = new PhoneNumber('21234567890');
     expect(phone.number()).toEqual('0000000000');
   });
 
-  xit('invalid when 9 digits', function() {
+  it('invalid when 9 digits', function() {
     var phone = new PhoneNumber('123456789');
     expect(phone.number()).toEqual('0000000000');
   });
@@ -90,7 +90,7 @@ xdescribe('sanitize()', function() {
   });
 });
 
-describe('validatePhoneNumber()', function() {
+xdescribe('validatePhoneNumber()', function() {
   it('throws InvalidParameterException for non-string input', function() {
     expect(function() {
       var phone = new PhoneNumber('10');
