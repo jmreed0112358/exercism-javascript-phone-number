@@ -53,21 +53,21 @@ describe('parse()', function() {
     var input = '0123456789';
     var phone = new PhoneNumber(input);
     var expected = '012';
-    expect(phone.areaCode).toEqual(expected);
+    expect(phone.areaCodeString).toEqual(expected);
   });
 
   it('parses exchangeCode properly', function() {
     var input = '0123456789';
     var phone = new PhoneNumber(input);
     var expected = '345';
-    expect(phone.exchangeCode).toEqual(expected);
+    expect(phone.exchangeCodeString).toEqual(expected);
   });
 
   it('parses baseCode properly', function() {
     var input = '0123456789';
     var phone = new PhoneNumber(input);
     var expected = '6789';
-    expect(phone.baseCode).toEqual(expected);
+    expect(phone.baseCodeString).toEqual(expected);
   });
 });
 

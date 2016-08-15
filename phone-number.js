@@ -32,9 +32,9 @@ PhoneNumber.prototype.toString = function() {
  * exchange code and base.
  */
 PhoneNumber.prototype.parse = function() {
-  this.areaCode = this.phoneNumber.substring(0, 3);
-  this.exchangeCode = this.phoneNumber.substring(3, 6);
-  this.baseCode = this.phoneNumber.substring(6,10);
+  this.areaCodeString = this.phoneNumber.substring(0, 3);
+  this.exchangeCodeString = this.phoneNumber.substring(3, 6);
+  this.baseCodeString = this.phoneNumber.substring(6,10);
 };
 
 /*
