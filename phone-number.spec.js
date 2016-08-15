@@ -49,7 +49,7 @@ describe('sanitize()', function() {
   it('throws InvalidParameterException when given non-string input', function() {
     expect(function() {
       var phone = new PhoneNumber('10');
-      phone.sanitise({});
+      phone.sanitize({});
     }).toThrow(
       new InvalidParameterException('Input was not a string'));
   });
