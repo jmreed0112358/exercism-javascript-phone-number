@@ -9,6 +9,7 @@ const ERROR_NUMBER = '0000000000';
 
 var PhoneNumber = function(rawNumber) {
   this.phoneNumber = this.validatePhoneNumber(this.sanitize(rawNumber));
+  this.parse();
 };
 
 PhoneNumber.prototype.number = function() {
@@ -25,6 +26,16 @@ PhoneNumber.prototype.areaCode = function() {
 PhoneNumber.prototype.toString = function() {
   throw new NotImplementedException();
 }
+
+/*
+ * Takes a valid 10 digit phone number and pulls out the area code,
+ * exchange code and base.
+ */
+PhoneNumber.prototype.parse = function() {
+  this.areaCode = this.phoneNumber.substring(0, 3);
+  this.exchangeCode = this.phoneNumber.substring(3, 6);
+  this.baseCode = this.phoneNumber.substring(6,10);
+};
 
 /*
  * Remove all chars except for digits.
