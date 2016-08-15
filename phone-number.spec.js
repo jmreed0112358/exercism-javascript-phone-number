@@ -34,8 +34,8 @@ xdescribe('number()', function() {
   });
 });
 
-xdescribe('areaCode()', function() {
-  xit('has an area code', function() {
+describe('areaCode()', function() {
+  it('has an area code', function() {
     var phone = new PhoneNumber('1234567890');
     expect(phone.areaCode()).toEqual('123');
   });
@@ -48,7 +48,7 @@ xdescribe('toString()', function() {
   });
 });
 
-describe('parse()', function() {
+xdescribe('parse()', function() {
   it('parses areaCode properly', function() {
     var input = '0123456789';
     var phone = new PhoneNumber(input);
