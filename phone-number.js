@@ -50,10 +50,35 @@ PhoneNumber.prototype.sanitize = function(rawInput) {
 /*
  * Validates that a numeric string is a valid phone number according to
  * the rules set in the README.
+ * Valid 11 digit numbers have their 1st number trimmed off.
  */
 
-PhoneNumber.prototype.validatePhoneNumber = function() {
-  throw new NotImplementedException();
+PhoneNumber.prototype.validatePhoneNumber = function(rawNumber) {
+  var i = 0;
+
+  if (typeof rawNumber !== 'string') {
+    throw new InvalidParameterException('Input was not a string');
+  }
+
+  if (10 !== rawNumber.length && 11 !== rawNumber.length) {
+    return ERROR_NUMBER;
+  }
+
+  for (i = 0 ; i < rawNumber.length ; i++ ) {
+    if (!validator.isWhitelisted(rawNumber[i], VALID_CHARS)) {
+      return ERROR_NUMBER;
+    }
+  }
+
+  if (11 === rawNumber.length) {
+    if (rawNumber[0] === '1') {
+      rawNumber = rawNumber.substring(1, rawNumber.length);
+    } else {
+      return ERROR_NUMBER;
+    }
+  }
+
+  return rawNumber;
 };
 
 module.exports = PhoneNumber;
