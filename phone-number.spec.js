@@ -4,6 +4,7 @@ var PhoneNumber = require('./phone-number'),
   NotImplementedException = require('./exceptions/NotImplementedException.js'),
   InvalidParameterException = require('./exceptions/InvalidParameterException.js');
 
+const ERROR_NUMBER = '0000000000';
 const UNPRINTABLE_CHARS = '\u0000\u0001\u0002\u0003\u0004\u0005\u0006\u0007\b\t\n\u000b\f\r\u000e\u000f\u0010\u0011\u0012\u0013\u0014\u0015\u0016\u0017\u0018\u0019\u001a\u001b\u001c\u001d\u001e\u001f';
 
 xdescribe('number()', function() {
@@ -47,7 +48,7 @@ xdescribe('toString()', function() {
   });
 });
 
-describe('sanitize()', function() {
+xdescribe('sanitize()', function() {
   it('throws InvalidParameterException when given non-string input', function() {
     expect(function() {
       var phone = new PhoneNumber('10');
@@ -89,7 +90,7 @@ describe('sanitize()', function() {
   });
 });
 
-xdescribe('validatePhoneNumber()', function() {
+describe('validatePhoneNumber()', function() {
   it('throws InvalidParameterException for non-string input', function() {
     expect(function() {
       var phone = new PhoneNumber('10');
@@ -102,7 +103,7 @@ xdescribe('validatePhoneNumber()', function() {
     var input = UNPRINTABLE_CHARS + 'a012asdfasfwei345earwar;klasjdf678901a;lksjd\t\nfaklsjfa23^((*$&(#*))@)*&$(&456789';
     var phone = new PhoneNumber(input);
     var actual = phone.validatePhoneNumber(input);
-    var expected = '0000000000';
+    var expected = ERROR_NUMBER;
     expect(actual).toEqual(expected);
   });
 
@@ -110,7 +111,7 @@ xdescribe('validatePhoneNumber()', function() {
     var input = '012345678901234567890123456789';
     var phone = new PhoneNumber(input);
     var actual = phone.validatePhoneNumber(input);
-    var expected = '0000000000';
+    var expected = ERROR_NUMBER;
     expect(actual).toEqual(expected);
   });
 
@@ -118,7 +119,7 @@ xdescribe('validatePhoneNumber()', function() {
     var input = '10';
     var phone = new PhoneNumber(input);
     var actual = phone.validatePhoneNumber(input);
-    var expected = '0000000000';
+    var expected = ERROR_NUMBER;
     expect(actual).toEqual(expected);
   });
 
@@ -142,7 +143,7 @@ xdescribe('validatePhoneNumber()', function() {
     var input = '60123456789';
     var phone = new PhoneNumber(input);
     var actual = phone.validatePhoneNumber(input);
-    var expected = '0000000000';
+    var expected = ERROR_NUMBER;
     expect(actual).toEqual(expected);
   });
 });
