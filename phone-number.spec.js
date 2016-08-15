@@ -7,7 +7,7 @@ var PhoneNumber = require('./phone-number'),
 const ERROR_NUMBER = '0000000000';
 const UNPRINTABLE_CHARS = '\u0000\u0001\u0002\u0003\u0004\u0005\u0006\u0007\b\t\n\u000b\f\r\u000e\u000f\u0010\u0011\u0012\u0013\u0014\u0015\u0016\u0017\u0018\u0019\u001a\u001b\u001c\u001d\u001e\u001f';
 
-xdescribe('number()', function() {
+describe('number()', function() {
   it('cleans the number (123) 456-7890', function() {
     var phone = new PhoneNumber('(123) 456-7890');
     expect(phone.number()).toEqual('1234567890');
@@ -34,7 +34,7 @@ xdescribe('number()', function() {
   });
 });
 
-xdescribe('areaCode()', function() {
+describe('areaCode()', function() {
   it('has an area code', function() {
     var phone = new PhoneNumber('1234567890');
     expect(phone.areaCode()).toEqual('123');
@@ -48,7 +48,7 @@ describe('toString()', function() {
   });
 });
 
-xdescribe('parse()', function() {
+describe('parse()', function() {
   it('parses areaCode properly', function() {
     var input = '0123456789';
     var phone = new PhoneNumber(input);
@@ -71,7 +71,7 @@ xdescribe('parse()', function() {
   });
 });
 
-xdescribe('sanitize()', function() {
+describe('sanitize()', function() {
   it('throws InvalidParameterException when given non-string input', function() {
     expect(function() {
       var phone = new PhoneNumber('10');
@@ -113,7 +113,7 @@ xdescribe('sanitize()', function() {
   });
 });
 
-xdescribe('validatePhoneNumber()', function() {
+describe('validatePhoneNumber()', function() {
   it('throws InvalidParameterException for non-string input', function() {
     expect(function() {
       var phone = new PhoneNumber('10');
