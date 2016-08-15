@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/jmreed0112358/exercism-javascript-phone-number/issues"
   },
-  "homepage": "https://github.com/jmreed0112358/exercism-javascript-phone-number#readme"
+  "homepage": "https://github.com/jmreed0112358/exercism-javascript-phone-number#readme",
+  "dependencies": {
+    "google-libphonenumber": "^1.0.27",
+    "validator": "^5.5.0"
+  }
 }
