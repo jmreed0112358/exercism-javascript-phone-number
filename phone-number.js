@@ -17,7 +17,7 @@ PhoneNumber.prototype.number = function() {
 };
 
 PhoneNumber.prototype.areaCode = function() {
-  throw new NotImplementedException();
+  return this.areaCodeString;
 }
 
 /*
