@@ -8,11 +8,11 @@ const VALID_CHARS = '0123456789';
 const ERROR_NUMBER = '0000000000';
 
 var PhoneNumber = function(rawNumber) {
-  this.number = rawNumber;
+  this.phoneNumber = this.validatePhoneNumber(this.sanitize(rawNumber));
 };
 
 PhoneNumber.prototype.number = function() {
-  throw new NotImplementedException();
+  return this.phoneNumber;
 };
 
 PhoneNumber.prototype.areaCode = function() {
