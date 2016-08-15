@@ -34,15 +34,15 @@ xdescribe('number()', function() {
   });
 });
 
-describe('areaCode()', function() {
+xdescribe('areaCode()', function() {
   it('has an area code', function() {
     var phone = new PhoneNumber('1234567890');
     expect(phone.areaCode()).toEqual('123');
   });
 });
 
-xdescribe('toString()', function() {
-  xit('formats a number', function() {
+describe('toString()', function() {
+  it('formats a number', function() {
     var phone = new PhoneNumber('1234567890');
     expect(phone.toString()).toEqual('(123) 456-7890');
   });
