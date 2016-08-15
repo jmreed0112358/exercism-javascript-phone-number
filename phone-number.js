@@ -24,7 +24,7 @@ PhoneNumber.prototype.areaCode = function() {
  * Returns phone number in the format '(areaCode) exchange-base'
  */
 PhoneNumber.prototype.toString = function() {
-  throw new NotImplementedException();
+  return '(' + this.areaCodeString + ') ' + this.exchangeCodeString + '-' + this.baseCodeString;
 }
 
 /*
