@@ -45,7 +45,7 @@ xdescribe('toString()', function() {
   });
 });
 
-describe('sanitize()', function() {
+xdescribe('sanitize()', function() {
   it('throws InvalidParameterException when given non-string input', function() {
     expect(function() {
       var phone = new PhoneNumber('10');
@@ -87,16 +87,60 @@ describe('sanitize()', function() {
   });
 });
 
-xdescribe('validatePhoneNumber()', function() {
-  it('returns error number for input containing non-numeric characters');
+describe('validatePhoneNumber()', function() {
+  it('throws InvalidParameterException for non-string input', function() {
+    it('throws InvalidParameterException when given non-string input', function() {
+    expect(function() {
+      var phone = new PhoneNumber('10');
+      phone.sanitize({});
+    }).toThrow(
+      new InvalidParameterException('Input was not a string'));
+  });
 
-  it('returns error number for input containing more than 11 characters');
+  it('returns error number for input containing non-numeric characters', function() {
+    var input = UNPRINTABLE_CHARS + 'a012asdfasfwei345earwar;klasjdf678901a;lksjd\t\nfaklsjfa23^((*$&(#*))@)*&$(&456789';
+    var phone = new PhoneNumber(input);
+    var actual = phone.sanitize(input)
+    var expected = '0000000000';
+    expect(actual).toEqual(expected);
+  });
 
-  it('returns error number for input containing less than 10 characters');
+  it('returns error number for numeric input containing more than 11 characters', function() {
+    var input = '012345678901234567890123456789';
+    var phone = new PhoneNumber(input);
+    var actual = phone.sanitize(input)
+    var expected = '0000000000';
+    expect(actual).toEqual(expected);
+  });
 
-  it('returns valid number for 10 digit numeric strings');
+  it('returns error number for numeric input containing less than 10 characters', function() {
+    var input = '10';
+    var phone = new PhoneNumber(input);
+    var actual = phone.sanitize(input)
+    var expected = '0000000000';
+    expect(actual).toEqual(expected);
+  });
 
-  it('returns valid number for 11 digit numeric strings when the first digit is a \'1\'');
+  it('returns valid number for 10 digit numeric strings', function() {
+    var input = '0123456789';
+    var phone = new PhoneNumber(input);
+    var actual = phone.sanitize(input)
+    var expected = '0123456789';
+    expect(actual).toEqual(expected);
+  });
 
-  it('returns error number for 11 digit numeric strings when the first digit is not a \'1\'');
+  it('returns valid number for 11 digit numeric strings when the first digit is a \'1\'', function() {
+    var input = '10123456789';
+    var phone = new PhoneNumber(input);
+    var actual = phone.sanitize(input)
+    var expected = '0123456789';
+    expect(actual).toEqual(expected);
+  });
+
+  it('returns error number for 11 digit numeric strings when the first digit is not a \'1\'', function() {
+    var input = '60123456789';
+    var phone = new PhoneNumber(input);
+    var actual = phone.sanitize(input)
+    var expected = '0000000000';
+  });
 });
